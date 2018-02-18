@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="me.developeralfa.calendoer_calendarandtodo.threeimp_tut">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fullscreen_content2"
+        android:src="@mipmap/recur"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:fontFamily="monospace"
+        android:layout_marginLeft="15dp"
+        android:text="I do that everyday"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:fontFamily="monospace"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Do you skip your morning yoga, because it's too late after you add it to the list, well, me too. We sorted that out, we'll add recurring tasks to your ToDo list before you wake up. Never forget pills and bills anymore!"/>
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_marginTop="59dp"
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+        <Button
+            android:id="@+id/skiprec"
+            android:background="@color/sharp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="monospace"
+
+            android:text="Done"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

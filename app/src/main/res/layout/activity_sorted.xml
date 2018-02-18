@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cool"
+    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+    tools:context="me.developeralfa.calendoer_calendarandtodo.Welcome_firstrun">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Everything Sorted!"
+        android:textSize="40dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="43dp"
+        android:layout_marginLeft="35dp"
+        android:fontFamily="serif-monospace"
+        android:gravity=""/>
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:src="@mipmap/calendoer"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Let's go!"
+        android:id="@+id/pending"
+        android:textColor="@color/white"
+        android:background="@drawable/button_cool"/>
+
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightGrey"
+    android:layout_height="match_parent"
+    tools:context="me.developeralfa.calendoer_calendarandtodo.allTasks">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="@color/cool"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Pending"
+        android:textSize="24dp"
+
+        android:fontFamily="monospace"/>
+        <Button
+            android:layout_width="0dp"
+            android:background="@color/sharp"
+            android:text="add task"
+            android:id="@+id/add"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/empty"/>
+    <ListView
+        android:layout_width="match_parent"
+
+        android:background="@color/cool"
+        android:layout_weight="3"
+        android:layout_height="0dp"
+        android:id="@+id/Pending">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/grey"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+            android:text="Completed"
+            android:textSize="24dp"
+
+            android:fontFamily="monospace"/>
+        <Button
+            android:layout_width="0dp"
+            android:background="@drawable/button_dark"
+            android:text="clear all"
+            android:id="@+id/clear"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/grey"
+        android:id="@+id/Done"></ListView>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Calendoer - Calendar and ToDo</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_reminder_tut">reminder_tut</string>
+
+    <string name="title_activity_recurring_tut">recurring_tut</string>
+    <string name="title_activity_notification_tut">notification_tut</string>
+</resources>

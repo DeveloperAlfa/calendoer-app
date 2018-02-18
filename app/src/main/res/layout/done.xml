@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/restore"
+            android:focusable="false"
+            android:id="@+id/restore"/>
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/textset"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/red"
+            android:paddingLeft="35dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical"
+
+            android:minHeight="?android:attr/listPreferredItemHeightSmall" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:id="@+id/recur"
+            android:scaleType="fitXY"
+            android:focusable="false"
+
+            android:src="@mipmap/bulb_off"
+            />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:background="@color/white"
+            android:focusable="false"
+            android:layout_height="match_parent"
+            android:src="@mipmap/pencil"
+            android:scaleType="fitXY"
+            android:id="@+id/editit"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:background="@color/white"
+            android:focusable="false"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/bin"
+            android:id="@+id/deleteit"/>
+    </LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="cool">#3488ff</color>
+    <color name="sharp">#3466ff</color>
+    <color name="white">#fff</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="maroon">#ff3388</color>
+    <color name="grey">#111</color>
+    <color name="lightGrey">#777</color>
+    <color name="black">#000</color>
+    <color name="blood">#ff3340</color>
+    <color name="red">#f00</color>
+</resources>

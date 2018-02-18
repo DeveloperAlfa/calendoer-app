@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cool"
+    tools:context="me.developeralfa.calendoer_calendarandtodo.taskForm">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:text="Task name"
+            android:layout_marginLeft="35dp"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="35dp"
+            android:id="@+id/tName"
+            android:background="@drawable/edit_warm"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Description"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:minHeight="45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="35dp"
+            android:id="@+id/desc"
+            android:background="@drawable/edit_warm"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:text="Due Date"
+            android:layout_marginLeft="35dp"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"/>
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/due"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:text="Today"
+                android:textColor="@color/cool"
+                android:textColorHint="@color/white"
+                android:background="@drawable/edit_warm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:text="Tomorrow"
+                android:textColor="@color/cool"
+                android:textColorHint="@color/white"
+                android:background="@drawable/edit_warm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:text="Later"
+                android:textColor="@color/cool"
+                android:textColorHint="@color/white"
+                android:background="@drawable/edit_warm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:textColor="@color/white"
+        android:id="@+id/submit"
+        android:fontFamily="monospace"
+        android:background="@drawable/button_cool"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="bottom"/>
+</LinearLayout>
