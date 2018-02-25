@@ -79,7 +79,7 @@ public class Decider extends AppCompatActivity {
 
 
     }
-    //my-branch
+    //master-branch
     private ArrayList<String> toList(HashSet<String> s) {
         ArrayList<String> res = new ArrayList<>();
         for(int i=0;i<s.size();i++) {
