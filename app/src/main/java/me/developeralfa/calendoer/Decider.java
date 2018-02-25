@@ -2,6 +2,8 @@ package me.developeralfa.calendoer;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,27 +16,33 @@ import java.util.Set;
 
 public class Decider extends AppCompatActivity {
     SharedPreferences sharedPreferences, taskPreferences;
+    TodoOpenHandler todoOpenHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decider);
         sharedPreferences = getSharedPreferences("run", MODE_PRIVATE);
-        taskPreferences = getSharedPreferences("tasks", MODE_PRIVATE);
+//        taskPreferences = getSharedPreferences("tasks", MODE_PRIVATE);
+        todoOpenHandler = new TodoOpenHandler(this);
+        SQLiteDatabase db = todoOpenHandler.getReadableDatabase();
+
 
         if (sharedPreferences.contains("notfirst")) {
             Intent pendingIntent = new Intent(this, allTasks.class);
             pendingIntent.putExtra("fName", sharedPreferences.getString("fName", "Guest"));
             pendingIntent.putExtra("lName", sharedPreferences.getString("lName", ""));
             pendingIntent.putExtra("wake", sharedPreferences.getString("wake", "7:00"));
-            if (taskPreferences.contains("pending")) {
-                pendingIntent.putExtra("pending", toList((HashSet<String>)taskPreferences.getStringSet("pending", null)));
-                pendingIntent.putExtra("descpending", toList((HashSet<String>)taskPreferences.getStringSet("descpending", null)));
-                pendingIntent.putExtra("done", toList((HashSet<String>)taskPreferences.getStringSet("done", null)));
-                pendingIntent.putExtra("descdone", toList((HashSet<String>)taskPreferences.getStringSet("descdone", null)));
+//            if (taskPreferences.contains("pending")) {
+//                pendingIntent.putExtra("pending", toList((HashSet<String>)taskPreferences.getStringSet("pending", null)));
+//                pendingIntent.putExtra("descpending", toList((HashSet<String>)taskPreferences.getStringSet("descpending", null)));
+//                pendingIntent.putExtra("done", toList((HashSet<String>)taskPreferences.getStringSet("done", null)));
+//                pendingIntent.putExtra("descdone", toList((HashSet<String>)taskPreferences.getStringSet("descdone", null)));
 
-            }
-            startActivityForResult(pendingIntent, 2);
+            //}
+            String[] columns = {Constants.Tasks.TASK,Constants.Tasks.DESCRIPTION,Constants.Tasks.DATEADDED,Constants.Tasks.DATEDUE};
+            Cursor cursor =  db.query(Constants.Tasks.TABLE_NAME,columns,null,null,null,null,null);
+            startActivity(pendingIntent);
 
 
         } else {
@@ -55,26 +63,7 @@ public class Decider extends AppCompatActivity {
                 editor.putString("lName", data.getStringExtra("lName"));
                 editor.putString("Wake", data.getStringExtra("Wake"));
                 editor.commit();
-                startActivity(new Intent(Decider.this,Decider.class));
-                finish();
-            }
-        }
-        if (requestCode == 2) {
-            if (resultCode == 1) {
-                SharedPreferences.Editor editor = taskPreferences.edit();
-                ArrayList<String> pendingal = data.getStringArrayListExtra("pending");
-                ArrayList<String> descpendingal = data.getStringArrayListExtra("descpending");
-                ArrayList<String> doneal = data.getStringArrayListExtra("done");
-                ArrayList<String> descdoneal = data.getStringArrayListExtra("descdone");
-                HashSet<String> pending = toSet(pendingal);
-                HashSet<String> descpending = toSet(descpendingal);
-                HashSet<String> done = toSet(doneal);
-                HashSet<String> descdone = toSet(descdoneal);
-                editor.putStringSet("pending", pending);
-                editor.putStringSet("descpending", descpending);
-                editor.putStringSet("done", done);
-                editor.putStringSet("descdone", descdone);
-                editor.commit();
+                startActivity(new Intent(Decider.this, Decider.class));
                 finish();
             }
         }

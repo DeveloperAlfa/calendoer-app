@@ -26,6 +26,7 @@ public class Todapter extends BaseAdapter {
     recurClickListener recurClickListener;
     deleteClickListener deleteClickListener;
     editClickListener editClickListener;
+
     int im = R.mipmap.bulb_lit;
     boolean done;
     public Todapter(Context context, ArrayList<Task> tasks,infoClickListener infoClickListener,restoreClickListener restoreClickListener,recurClickListener recurClickListener,editClickListener editClickListener,doneClickListener doneClickListener,deleteClickListener deleteClickListener,boolean done)
