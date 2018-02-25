@@ -81,6 +81,8 @@ public class Decider extends AppCompatActivity {
     }
     //master
     //gamma
+    //master-branch
+    //alfa beta
     private ArrayList<String> toList(HashSet<String> s) {
         ArrayList<String> res = new ArrayList<>();
         for(int i=0;i<s.size();i++) {
