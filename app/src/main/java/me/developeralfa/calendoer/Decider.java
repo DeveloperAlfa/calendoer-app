@@ -48,7 +48,7 @@ public class Decider extends AppCompatActivity {
             startActivityForResult(new Intent(this, Welcome_firstrun.class), 1);
 
         }
-
+    finish();
 
     }
 

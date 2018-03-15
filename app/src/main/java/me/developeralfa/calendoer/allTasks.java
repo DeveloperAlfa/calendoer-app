@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,8 +34,10 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tasks);
-        custDone = getDoneFromDB();
-        custPending = getPendingFromDB();
+        custDone.clear();
+        custDone.addAll(getDoneFromDB());
+        custPending.clear();
+        custPending.addAll(getPendingFromDB());
         Intent parent = getIntent();
         setTitle(parent.getStringExtra("fName")+"'s Todo");
 //        if(parent.hasExtra("pending"))
@@ -101,14 +104,37 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
     }
 
     private ArrayList<Task> getPendingFromDB() {
-        //TODO
+
         ArrayList<Task> tasks = new ArrayList<>();
+        TodoOpenHandler openHandler = new TodoOpenHandler(this);
+        SQLiteDatabase db = openHandler.getReadableDatabase();
+        Cursor cursor = db.query(Constants.Tasks.TABLE_NAME,null,Constants.Tasks.DONE+"='True'",null,null,null,null);
+        while(cursor.moveToNext())
+        {
+            Task task = new Task();
+            task.taskName = cursor.getString(cursor.getColumnIndex(Constants.Tasks.TASK));
+            task.Description = cursor.getString(cursor.getColumnIndex(Constants.Tasks.DESCRIPTION));
+            task.Date = cursor.getString(cursor.getColumnIndex(Constants.Tasks.DATEDUE));
+            tasks.add(task);
+        }
         return tasks;
+
     }
 
     private ArrayList<Task> getDoneFromDB() {
         //TODO
         ArrayList<Task> tasks = new ArrayList<>();
+        TodoOpenHandler openHandler = new TodoOpenHandler(this);
+        SQLiteDatabase db = openHandler.getReadableDatabase();
+        Cursor cursor = db.query(Constants.Tasks.TABLE_NAME,null,Constants.Tasks.DONE+" = 'False' ",null,null,null,null);
+        while(cursor.moveToNext())
+        {
+            Task task = new Task();
+            task.taskName = cursor.getString(cursor.getColumnIndex(Constants.Tasks.TASK));
+            task.Description = cursor.getString(cursor.getColumnIndex(Constants.Tasks.DESCRIPTION));
+            task.Date = cursor.getString(cursor.getColumnIndex(Constants.Tasks.DATEDUE));
+            tasks.add(task);
+        }
         return tasks;
     }
 
@@ -231,25 +257,26 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
 
     @Override
     public void onEditClick(int position, boolean done) {
-        ArrayList<String> curr = new ArrayList<>();
-        ArrayList<String> desccurr = new ArrayList<>();
+        ArrayList<Task> curr = new ArrayList<>();
+
         if(done)
         {
-             curr = this.done;
-            desccurr = this.descdone;
+             Toast.makeText(this,"Undelete to edit",Toast.LENGTH_SHORT).show();
+
         }
         else
         {
-            curr = this.pending;
-            desccurr = this.descpending;
+            curr = this.custPending;
+            Intent intent = new Intent(allTasks.this,taskDetails.class);
+            intent.putExtra("tNamedet",curr.get(position).taskName);
+            intent.putExtra("descdet",curr.get(position).Description);
+            intent.putExtra("pos",position);
+            startActivityForResult(intent,2);
+            save();
+
         }
 
-        Intent intent = new Intent(allTasks.this,taskDetails.class);
-//        intent.putExtra("tNamedet",curr.get(position));
-//        intent.putExtra("descdet",desccurr.get(position));
-        intent.putExtra("pos",position);
-        startActivityForResult(intent,2);
-        save();
+
 
 
     }
@@ -290,14 +317,11 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
     @Override
     public void onRestoreClick(int position) {
 
-        pending.add(done.get(position));
-        descpending.add(descdone.get(position));
+
         Task t = new Task();
-        t.taskName = (done.get(position));
-        t.Description = descdone.get(position);
+        t.taskName = (custDone.get(position).taskName);
+        t.Description = custDone.get(position).Description;
         custPending.add(t);
-        done.remove(position);
-        descdone.remove(position);
         custDone.remove(position);
 
         doneAdapter.notifyDataSetChanged();
