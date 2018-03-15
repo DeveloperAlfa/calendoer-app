@@ -2,6 +2,8 @@ package me.developeralfa.calendoer;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,10 @@ public class taskForm extends AppCompatActivity {
         desc = findViewById(R.id.desc);
         due = findViewById(R.id.due);
         selected = findViewById(due.getCheckedRadioButtonId());
+        tName.setText(parent.getStringExtra("tName"));
+        desc.setText(parent.getStringExtra("desc"));
+
+
         tName.setText(parent.getStringExtra("tName"));
         desc.setText(parent.getStringExtra("desc"));
         Submit = findViewById(R.id.submit);

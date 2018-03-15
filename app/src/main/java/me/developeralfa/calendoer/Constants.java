@@ -6,9 +6,12 @@ package me.developeralfa.calendoer;
 
 public class Constants {
     static int ID_KEY;
+    static String False = "False";
+    static String True = "True";
      static public class Tasks
     {
         public static final String DESCRIPTION = "Description" ;
+        public static final String DONE = "Done";
         static String TABLE_NAME = "Tasks";
         public static String ID = "id";
         public static String TASK = "name";

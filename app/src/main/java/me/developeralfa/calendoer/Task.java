@@ -7,5 +7,5 @@ package me.developeralfa.calendoer;
 public class Task {
     String taskName;
     String Description;
-    String Time;
+    String Date;
 }

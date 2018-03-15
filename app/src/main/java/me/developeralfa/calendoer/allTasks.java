@@ -1,9 +1,11 @@
 package me.developeralfa.calendoer;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class allTasks extends AppCompatActivity implements infoClickListener,restoreClickListener,recurClickListener,deleteClickListener,doneClickListener,editClickListener {
@@ -30,16 +33,17 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tasks);
-
+        custDone = getDoneFromDB();
+        custPending = getPendingFromDB();
         Intent parent = getIntent();
         setTitle(parent.getStringExtra("fName")+"'s Todo");
-        if(parent.hasExtra("pending"))
-        {
-            pending = parent.getStringArrayListExtra("pending");
-        }
-        if(parent.hasExtra("descpending")) descpending = parent.getStringArrayListExtra("descpending");
-        if(parent.hasExtra("done")) done = parent.getStringArrayListExtra("done");
-        if(parent.hasExtra("descdone")) descdone = parent.getStringArrayListExtra("descdone");
+//        if(parent.hasExtra("pending"))
+//        {
+//            pending = parent.getStringArrayListExtra("pending");
+//        }
+//        if(parent.hasExtra("descpending")) descpending = parent.getStringArrayListExtra("descpending");
+//        if(parent.hasExtra("done")) done = parent.getStringArrayListExtra("done");
+//        if(parent.hasExtra("descdone")) descdone = parent.getStringArrayListExtra("descdone");
         add = findViewById(R.id.add);
         clear = findViewById(R.id.clear);
         Pending = findViewById(R.id.Pending);
@@ -96,20 +100,38 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
 
     }
 
+    private ArrayList<Task> getPendingFromDB() {
+        //TODO
+        ArrayList<Task> tasks = new ArrayList<>();
+        return tasks;
+    }
+
+    private ArrayList<Task> getDoneFromDB() {
+        //TODO
+        ArrayList<Task> tasks = new ArrayList<>();
+        return tasks;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==1)
         {
             if(resultCode==1)
             {
-                pending.add(data.getStringExtra("tName"));
-                descpending.add(data.getStringExtra("desc"));
+//                pending.add(data.getStringExtra("tName"));
+//                descpending.add(data.getStringExtra("desc"));
                 Task t = new Task();
                 t.taskName = data.getStringExtra("tName");
                 t.Description = data.getStringExtra("desc");
                 custPending.add(t);
                 pendingAdapter.notifyDataSetChanged();
-                save();
+//                save();
+                TodoOpenHandler openHandler = new TodoOpenHandler(this);
+                SQLiteDatabase db = openHandler.getWritableDatabase();
+                ContentValues values = taskValues(t,Constants.False);
+                db.insert(Constants.Tasks.TABLE_NAME,null,values);
+
+
 
             }
         }
@@ -117,8 +139,8 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
         {
             if(resultCode==1)
             {
-                pending.set(data.getIntExtra("pos",0),data.getStringExtra("tName"));
-                descpending.set(data.getIntExtra("pos",0),data.getStringExtra("desc"));
+//                pending.set(data.getIntExtra("pos",0),data.getStringExtra("tName"));
+//                descpending.set(data.getIntExtra("pos",0),data.getStringExtra("desc"));
                 Task t = new Task();
                 t.taskName = data.getStringExtra("tName");
                 t.Description = data.getStringExtra("desc");
@@ -128,6 +150,19 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private ContentValues taskValues(Task t,String done) {
+        Date dt = new Date(System.currentTimeMillis());
+        ContentValues values = new ContentValues();
+        values.put(Constants.Tasks.TASK,t.taskName);
+        values.put(Constants.Tasks.DESCRIPTION,t.Description);
+        values.put(Constants.Tasks.DONE,done);
+        values.put(Constants.Tasks.DATEADDED, dt.getTime());
+        values.put(Constants.Tasks.DATEDUE,t.Date);
+        return values;
+
+    }
+
     public void save()
     {
         Intent intent = new Intent();
@@ -139,8 +174,8 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
     }
     public void del(int a)
     {
-        done.remove(a);
-        descdone.remove(a);
+//        done.remove(a);
+//        descdone.remove(a);
         custDone.remove(a);
         doneAdapter.notifyDataSetChanged();
         save();
@@ -169,8 +204,8 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
     @Override
     public void onInfoClick(int position) {
         Intent intent = new Intent(allTasks.this,taskDetails.class);
-        intent.putExtra("tNamedet",pending.get(position));
-        intent.putExtra("descdet",descpending.get(position));
+        intent.putExtra("tNamedet",custPending.get(position).taskName);
+        intent.putExtra("descdet",custPending.get(position).Description);
         intent.putExtra("pos",position);
         startActivityForResult(intent,2);
         save();
@@ -178,19 +213,19 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
 
     @Override
     public void onDoneClick(int position) {
-        descdone.add(descpending.get(position));
-        done.add(pending.get(position));
+//        descdone.add(descpending.get(position));
+//        done.add(pending.get(position));
 
         Task t = new Task();
-        t.taskName = pending.get(position);
-        t.Description = descpending.get(position);
+        t.taskName = custPending.get(position).taskName;
+        t.Description = custPending.get(position).Description;
         custDone.add(t);
-        pending.remove(position);
-        descpending.remove(position);
+//        pending.remove(position);
+//        descpending.remove(position);
         custPending.remove(position);
         doneAdapter.notifyDataSetChanged();
         pendingAdapter.notifyDataSetChanged();
-        save();
+//        save();
 
     }
 
@@ -210,8 +245,8 @@ public class allTasks extends AppCompatActivity implements infoClickListener,res
         }
 
         Intent intent = new Intent(allTasks.this,taskDetails.class);
-        intent.putExtra("tNamedet",curr.get(position));
-        intent.putExtra("descdet",desccurr.get(position));
+//        intent.putExtra("tNamedet",curr.get(position));
+//        intent.putExtra("descdet",desccurr.get(position));
         intent.putExtra("pos",position);
         startActivityForResult(intent,2);
         save();

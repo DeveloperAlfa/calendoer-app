@@ -40,8 +40,7 @@ public class Decider extends AppCompatActivity {
 //                pendingIntent.putExtra("descdone", toList((HashSet<String>)taskPreferences.getStringSet("descdone", null)));
 
             //}
-            String[] columns = {Constants.Tasks.TASK,Constants.Tasks.DESCRIPTION,Constants.Tasks.DATEADDED,Constants.Tasks.DATEDUE};
-            Cursor cursor =  db.query(Constants.Tasks.TABLE_NAME,columns,null,null,null,null,null);
+
             startActivity(pendingIntent);
 
 

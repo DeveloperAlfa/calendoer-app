@@ -18,6 +18,7 @@ public class TodoOpenHandler extends SQLiteOpenHelper {
         String makeTableForTasks = "CREATE TABLE " + Constants.Tasks.TABLE_NAME + " ( "+
                 Constants.Tasks.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 Constants.Tasks.TASK + " TEXT, "+
+                Constants.Tasks.DONE + " TEXT,"+
                 Constants.Tasks.DESCRIPTION + " TEXT,"+
                 Constants.Tasks.DATEADDED +" DATE," +
                 Constants.Tasks.DATEDUE + " DATE);";
@@ -26,7 +27,7 @@ public class TodoOpenHandler extends SQLiteOpenHelper {
                 Constants.Notes.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 Constants.Notes.TASK_ID + " INTEGER, "+
                 Constants.Notes.DESCRIPTION + " TEXT,"+
-                " FOREIGN KEY(" + Constants.Notes.TASK_ID + ") REFERENCES "+ Constants.Tasks.TABLE_NAME+"("+Constants.Tasks.ID+");";
+                " FOREIGN KEY(" + Constants.Notes.TASK_ID + ") REFERENCES "+ Constants.Tasks.TABLE_NAME+"("+Constants.Tasks.ID+"));";
         db.execSQL(makeTableForComments);
 
 
